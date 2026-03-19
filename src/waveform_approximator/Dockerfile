@@ -51,13 +51,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/*
 
 # Add "matlab" user and grant sudo permission.
-RUN adduser --shell /bin/bash --disabled-password --gecos "" matlab \
-    && echo "matlab ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/matlab \
-    && chmod 0440 /etc/sudoers.d/matlab
+RUN adduser --shell /bin/bash --disabled-password --gecos "" okahilak \
+    && echo "okahilak ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/okahilak \
+    && chmod 0440 /etc/sudoers.d/okahilak
 
 # Set user and work directory.
-USER matlab
-WORKDIR /home/matlab
+USER okahilak
+WORKDIR /home/okahilak
 
 # Run mpm to install MATLAB in the target location and delete the mpm installation afterwards.
 # If mpm fails to install successfully, then print the logfile in the terminal, otherwise clean up.
@@ -85,10 +85,10 @@ ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=MATLAB:DOCKERFILE:V1
 ###
 
 # Copy waveform approximator
-COPY src/waveform_approximator/waveform_approximator /home/matlab
+COPY src/waveform_approximator/waveform_approximator /home/okahilak
 
 # Copy custom ROS messages
-COPY api/matlab/matlab_msg_gen.zip /home/matlab
+COPY api/matlab/matlab_msg_gen.zip /home/okahilak
 
 # Set the Cyclone DDS configuration
 COPY config/cyclonedds.xml /config/
